@@ -6,13 +6,17 @@ namespace ShopMvcApp_NPD211.Controllers
 {
     public class HomeController : Controller
     {
+        private string[] colors = { "Red", "Green", "Brown", "Purple" };
         public HomeController()
         {
         }
 
         public IActionResult Index()
         {
-            return View(); // ~/Home/Index.cshtml
+            // ... working with db ...
+            // ... logic
+
+            return View(colors); // ~/Home/Index.cshtml
         }
 
         public IActionResult Privacy()

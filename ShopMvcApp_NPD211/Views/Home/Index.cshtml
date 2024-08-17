@@ -1,4 +1,7 @@
-﻿<div class="text-center">
+﻿@model string[];
+
+@* Model - object transfered from controller *@
+<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>
         Current second is
@@ -14,3 +17,10 @@
     
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<ul class="list-group">
+    @foreach (var i in Model)
+    {
+        <li class="list-group-item">@i</li>
+    }
+</ul>
