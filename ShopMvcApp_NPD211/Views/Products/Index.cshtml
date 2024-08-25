@@ -1,0 +1,56 @@
+﻿@model List<Product>
+
+<h1>Products List</h1>
+<p>You can manage all the available products in the market.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>
+                    <span>@i.Name</span>
+                    @if(i.Discount > 0)
+                    {
+                        <span class="badge bg-primary">SALE</span>
+                    }
+                </td>
+                <td>
+                    @if (i.Discount > 0)
+                    {
+                        <span>@(i.Price - i.Price / 100 * i.Discount)</span>
+                        <del>@i.Price</del>
+                        <span>$</span>
+                    }
+                    else
+                    {
+                        <span>@i.Price$</span>
+                    }
+                </td>
+                <td>@i.Category?.Name</td>
+                <td>@i.Discount%</td>
+                <td>
+                    @if(i.Quantity > 0)
+                    {
+                        <span class="badge bg-success">In Stock: @i.Quantity</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
