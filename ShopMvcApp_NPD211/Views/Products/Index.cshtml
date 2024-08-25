@@ -3,7 +3,7 @@
 <h1>Products List</h1>
 <p>You can manage all the available products in the market.</p>
 
-<table class="table table-striped">
+<table class="table table-striped products-table">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -12,13 +12,17 @@
             <th scope="col">Category</th>
             <th scope="col">Discount</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var i in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@i.Id</th>
+                <td class="image-cell">
+                    <img class="rounded-1" src="@(i.ImageUrl ?? "./images/no_image.png")" />
+                </td>
                 <td>
                     <span>@i.Name</span>
                     @if(i.Discount > 0)
@@ -49,6 +53,14 @@
                     {
                         <span class="badge bg-secondary">Out of Stock</span>
                     }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@i.Id" type="button" class="btn btn-outline-secondary">
+                        <i class="bi bi-info-square-fill"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@i.Id" type="button" class="btn btn-outline-danger">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
                 </td>
             </tr>
         }

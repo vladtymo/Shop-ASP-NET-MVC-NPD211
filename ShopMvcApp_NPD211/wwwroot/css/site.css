@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.products-table .image-cell {
+    width: 50px;
+}
+.products-table .image-cell img {
+    transition: .2s;
+    height: 50px;
+}
+.products-table .image-cell img:hover {
+    transform: scale(4);
+}
