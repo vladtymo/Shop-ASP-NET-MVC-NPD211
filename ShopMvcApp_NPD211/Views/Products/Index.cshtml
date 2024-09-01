@@ -3,10 +3,13 @@
 <h1>Products List</h1>
 <p>You can manage all the available products in the market.</p>
 
+<a asp-controller="Products" asp-action="Create" type="button" class="btn btn-primary mb-2">Create New Product</a>
+
 <table class="table table-striped products-table">
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Image</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Category</th>

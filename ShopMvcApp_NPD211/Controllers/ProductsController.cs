@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,22 @@ namespace ShopMvcApp_NPD211.Controllers
             var products = context.Products.Include(x => x.Category).ToList();
 
             return View(products);
-        }   
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Product model)
+        {
+            context.Products.Add(model);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
         public IActionResult Delete(int id)
         {
