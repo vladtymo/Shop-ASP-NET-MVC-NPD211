@@ -49,6 +49,31 @@ namespace ShopMvcApp_NPD211.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var product = context.Products.Find(id);
+            if (product == null) return NotFound(); // 404
+
+            LoadCategories();
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product model)
+        {
+            if (!ModelState.IsValid)
+            {
+                LoadCategories();
+                return View(model);
+            }
+
+            context.Products.Update(model);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Delete(int id)
         {
             var product = context.Products.Find(id);
