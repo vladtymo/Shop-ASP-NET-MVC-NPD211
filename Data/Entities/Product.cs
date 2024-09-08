@@ -1,7 +1,13 @@
-﻿namespace Data.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Data.Entities
 {
     public class Product
     {
+        //[MaxLength(200)]
+        //[Range(0, 100)]
+        //[EmailAddress]
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
