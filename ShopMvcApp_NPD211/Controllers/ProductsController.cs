@@ -3,6 +3,7 @@ using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ShopMvcApp_NPD211.Models;
 
 namespace ShopMvcApp_NPD211.Controllers
 {
@@ -35,7 +36,7 @@ namespace ShopMvcApp_NPD211.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product model)
+        public IActionResult Create(CreateProductModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +44,18 @@ namespace ShopMvcApp_NPD211.Controllers
                 return View(model);
             }
 
-            context.Products.Add(model);
+            var entity = new Product()
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Discount = model.Discount,
+                Quantity = model.Quantity,
+                CategoryId = model.CategoryId,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+            };
+
+            context.Products.Add(entity);
             context.SaveChanges();
 
             return RedirectToAction("Index");
