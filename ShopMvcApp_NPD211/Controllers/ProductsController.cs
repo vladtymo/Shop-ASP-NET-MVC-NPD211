@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using AutoMapper;
+using Data;
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,13 @@ namespace ShopMvcApp_NPD211.Controllers
     public class ProductsController : Controller
     {
         private ShopMvcDbContext context = new();
+        private readonly IMapper mapper;
+
+        public ProductsController(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public IActionResult Index()
         {
             // load products from db
@@ -44,16 +52,20 @@ namespace ShopMvcApp_NPD211.Controllers
                 return View(model);
             }
 
-            var entity = new Product()
-            {
-                Name = model.Name,
-                Price = model.Price,
-                Discount = model.Discount,
-                Quantity = model.Quantity,
-                CategoryId = model.CategoryId,
-                Description = model.Description,
-                ImageUrl = model.ImageUrl,
-            };
+            // 1 - manual mapping
+            //var entity = new Product()
+            //{
+            //    Name = model.Name,
+            //    Price = model.Price,
+            //    Discount = model.Discount,
+            //    Quantity = model.Quantity,
+            //    CategoryId = model.CategoryId,
+            //    Description = model.Description,
+            //    ImageUrl = model.ImageUrl,
+            //};
+
+            // 2 - auto mapping
+            var entity = mapper.Map<Product>(model);
 
             context.Products.Add(entity);
             context.SaveChanges();

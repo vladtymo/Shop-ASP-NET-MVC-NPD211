@@ -1,7 +1,12 @@
+using ShopMvcApp_NPD211.MapperProfiles;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(AppProfile));
 
 var app = builder.Build();
 
