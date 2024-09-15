@@ -4,7 +4,12 @@
 <form class="row g-3" method="post" asp-action="Edit">
     @* <div asp-validation-summary="All"></div> *@
 
-    <div class="col-md-12">
+    <div class="col-md-2">
+        <label asp-for="Id" class="form-label">ID</label>
+        <input asp-for="Id" readonly type="number" class="form-control">
+        <span asp-validation-for=Id class="form-text text-danger"></span>
+    </div>
+    <div class="col-md-10">
         <label asp-for="Name" class="form-label">Name</label>
         <input asp-for="Name" type="text" class="form-control" placeholder="Enter product name">
         <span asp-validation-for=Name class="form-text text-danger"></span>
