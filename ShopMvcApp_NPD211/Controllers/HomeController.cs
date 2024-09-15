@@ -1,22 +1,24 @@
+using AutoMapper;
+using Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopMvcApp_NPD211.Models;
 using System.Diagnostics;
 
 namespace ShopMvcApp_NPD211.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IMapper mapper, ShopMvcDbContext context) : Controller
     {
-        private string[] colors = { "Red", "Green", "Brown", "Purple" };
-        public HomeController()
-        {
-        }
+        private readonly IMapper mapper = mapper;
+        private readonly ShopMvcDbContext context = context;
 
         public IActionResult Index()
         {
             // ... working with db ...
-            // ... logic
+            var products = context.Products.Include(x => x.Category).ToList();
 
-            return View(colors); // ~/Home/Index.cshtml
+            // ~/Home/Index.cshtml
+            return View(mapper.Map<IEnumerable<ProductModel>>(products)); 
         }
 
         public IActionResult Privacy()

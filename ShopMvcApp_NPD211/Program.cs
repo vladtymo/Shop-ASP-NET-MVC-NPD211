@@ -1,10 +1,17 @@
+using Data;
+using Microsoft.EntityFrameworkCore;
 using ShopMvcApp_NPD211.MapperProfiles;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string connectionString = builder.Configuration.GetConnectionString("LocalDb")!;
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ShopMvcDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddAutoMapper(typeof(AppProfile));
 

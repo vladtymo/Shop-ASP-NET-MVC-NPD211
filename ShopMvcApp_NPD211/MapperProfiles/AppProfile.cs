@@ -9,6 +9,7 @@ namespace ShopMvcApp_NPD211.MapperProfiles
         public AppProfile()
         {
             CreateMap<CreateProductModel, Product>();
+            CreateMap<Product, ProductModel>();
         }
     }
 }
