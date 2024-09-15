@@ -1,7 +1,7 @@
 ﻿@model CreateProductModel
 <h1>Create New Product</h1>
 
-<form class="row g-3" method="post" asp-action="Create">
+<form class="row g-3" method="post" enctype="multipart/form-data" asp-action="Create">
     @* <div asp-validation-summary="All"></div> *@
 
     <div class="col-md-12">
@@ -38,10 +38,15 @@
         <span asp-validation-for=CategoryId class="form-text text-danger"></span>
     </div>
 
-    <div class="col-md-6">
+    @* <div class="col-md-6">
         <label asp-for="ImageUrl" class="form-label">Image URL</label>
         <input asp-for="ImageUrl" type="url" class="form-control" placeholder="Enter product image url">
         <span asp-validation-for=ImageUrl class="form-text text-danger"></span>
+    </div> *@
+    <div class="col-md-6">
+        <label asp-for="Image" class="form-label">Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Enter product image url">
+        <span asp-validation-for=Image class="form-text text-danger"></span>
     </div>
 
     <div class="col-12">

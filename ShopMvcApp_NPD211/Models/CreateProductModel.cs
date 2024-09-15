@@ -13,6 +13,7 @@ namespace ShopMvcApp_NPD211.Models
         public string Name { get; set; } = null!;
         [Url]
         public string? ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
 
         [MaxLength(1000)]
         public string? Description { get; set; }

@@ -5,19 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopMvcApp_NPD211.Models;
+using ShopMvcApp_NPD211.Services;
 
 namespace ShopMvcApp_NPD211.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController(
+        IMapper mapper, 
+        ShopMvcDbContext context, 
+        IFilesService filesService) : Controller
     {
-        private readonly ShopMvcDbContext context;
-        private readonly IMapper mapper;
-
-        public ProductsController(IMapper mapper, ShopMvcDbContext context)
-        {
-            this.context = context;
-            this.mapper = mapper;
-        }
+        private readonly ShopMvcDbContext context = context;
+        private readonly IFilesService filesService = filesService;
+        private readonly IMapper mapper = mapper;
 
         public IActionResult Index()
         {
@@ -45,7 +44,7 @@ namespace ShopMvcApp_NPD211.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProductModel model)
+        public async Task<IActionResult> Create(CreateProductModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -67,6 +66,10 @@ namespace ShopMvcApp_NPD211.Controllers
 
             // 2 - auto mapping
             var entity = mapper.Map<Product>(model);
+
+            // save file to server
+            if (model.Image != null)
+                entity.ImageUrl = await filesService.SaveProductImage(model.Image);
 
             context.Products.Add(entity);
             context.SaveChanges();
@@ -99,11 +102,14 @@ namespace ShopMvcApp_NPD211.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var product = context.Products.Find(id);
 
             if (product == null) return NotFound(); // 404
+
+            if (product.ImageUrl != null)
+                await filesService.DeleteProductImage(product.ImageUrl);
 
             context.Products.Remove(product);
             context.SaveChanges();

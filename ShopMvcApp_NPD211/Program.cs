@@ -1,6 +1,7 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
 using ShopMvcApp_NPD211.MapperProfiles;
+using ShopMvcApp_NPD211.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<ShopMvcDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddAutoMapper(typeof(AppProfile));
+
+builder.Services.AddScoped<IFilesService, FilesService>();
 
 builder.Services.AddDistributedMemoryCache();
 
