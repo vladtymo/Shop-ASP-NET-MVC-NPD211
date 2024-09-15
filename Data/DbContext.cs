@@ -11,12 +11,12 @@ namespace Data
         public ShopMvcDbContext() { }
         public ShopMvcDbContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopMvc_NPD211;Integrated Security=True;");
-        }
+        //    optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopMvc_NPD211;Integrated Security=True;");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
