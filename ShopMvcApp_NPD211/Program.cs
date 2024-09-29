@@ -23,8 +23,11 @@ builder.Services.AddDefaultIdentity<User>(options =>
 builder.Services.AddAutoMapper(typeof(AppProfile));
 
 builder.Services.AddScoped<IFilesService, FilesService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddHttpContextAccessor();
 
 // -------- sessions
 builder.Services.AddSession(options =>
