@@ -26,7 +26,7 @@ namespace ShopMvcApp_NPD211.Services
             using FileStream fs = new FileStream(fullPath, FileMode.Create);
             await file.CopyToAsync(fs);
 
-            return relativePath;
+            return Path.DirectorySeparatorChar + relativePath;
         }
 
         public Task<string> EditProductImage(IFormFile newFile, string oldPath)
@@ -36,7 +36,7 @@ namespace ShopMvcApp_NPD211.Services
 
         public Task DeleteProductImage(string path)
         {
-            string fullPath = Path.Combine(env.WebRootPath, path);
+            string fullPath = env.WebRootPath + path;
 
             if (File.Exists(fullPath))
                 return Task.Run(() => File.Delete(fullPath));
