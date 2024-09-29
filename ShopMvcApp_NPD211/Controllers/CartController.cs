@@ -1,10 +1,5 @@
-﻿using AutoMapper;
-using Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_NPD211.Extensions;
-using ShopMvcApp_NPD211.Models;
-using ShopMvcApp_NPD211.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using Core.Services;
 
 namespace ShopMvcApp_NPD211.Controllers
 {

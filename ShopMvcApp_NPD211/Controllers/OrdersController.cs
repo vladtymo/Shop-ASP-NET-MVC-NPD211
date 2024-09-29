@@ -1,10 +1,9 @@
-﻿using Data;
+﻿using Core.Services;
+using Data;
 using Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_NPD211.Extensions;
-using ShopMvcApp_NPD211.Services;
 using System.Security.Claims;
 
 namespace ShopMvcApp_NPD211.Controllers

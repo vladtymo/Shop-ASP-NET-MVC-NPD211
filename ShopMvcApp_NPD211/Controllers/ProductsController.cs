@@ -4,8 +4,8 @@ using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_NPD211.Models;
-using ShopMvcApp_NPD211.Services;
+using Core.Models;
+using Core.Services;
 
 namespace ShopMvcApp_NPD211.Controllers
 {

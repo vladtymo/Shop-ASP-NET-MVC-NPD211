@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using ShopMvcApp_NPD211.Models;
+using Core.Models;
 
-namespace ShopMvcApp_NPD211.MapperProfiles
+namespace Core.MapperProfiles
 {
     public class AppProfile : Profile
     {

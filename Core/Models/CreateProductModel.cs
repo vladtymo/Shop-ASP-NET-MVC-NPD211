@@ -1,7 +1,7 @@
-﻿using Data.Entities;
+﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShopMvcApp_NPD211.Models
+namespace Core.Models
 {
     public class CreateProductModel
     {

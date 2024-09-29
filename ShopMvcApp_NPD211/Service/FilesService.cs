@@ -1,14 +1,7 @@
-﻿using System;
+﻿using Core.Services;
 
 namespace ShopMvcApp_NPD211.Services
 {
-    public interface IFilesService
-    {
-        Task<string> SaveProductImage(IFormFile file);
-        Task<string> EditProductImage(IFormFile newFile, string oldPath);
-        Task DeleteProductImage(string path);
-    }
-
     public class FilesService(IWebHostEnvironment env) : IFilesService
     {
         const string folderName = "images";

@@ -1,10 +1,9 @@
 using Data;
 using Microsoft.EntityFrameworkCore;
-using ShopMvcApp_NPD211.MapperProfiles;
+using Core.MapperProfiles;
 using ShopMvcApp_NPD211.Services;
-using System.Reflection;
-using Microsoft.AspNetCore.Identity;
 using Data.Entities;
+using Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

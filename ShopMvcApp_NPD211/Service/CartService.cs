@@ -2,20 +2,11 @@
 using Data;
 using Data.Entities;
 using ShopMvcApp_NPD211.Extensions;
-using ShopMvcApp_NPD211.Models;
+using Core.Models;
+using Core.Services;
 
 namespace ShopMvcApp_NPD211.Services
 {
-    public interface ICartService
-    {
-        void Add(int id);
-        void Delete(int id);
-        void Clear();
-        IEnumerable<int> GetIds();
-        IEnumerable<Product> GetProducts();
-        IEnumerable<ProductModel> GetProductDtos();
-    }
-
     public class CartService : ICartService
     {
         const string cartKey = "cartItems";

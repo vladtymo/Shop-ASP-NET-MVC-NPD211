@@ -1,4 +1,4 @@
-﻿namespace ShopMvcApp_NPD211.Models
+﻿namespace Core.Models
 {
     public class ProductModel
     {
