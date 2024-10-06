@@ -1,4 +1,5 @@
 ﻿@page
+@using ShopMvcApp_NPD211.Extensions
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -32,6 +33,15 @@
                 <label asp-for="Input.Birthdate">Birthdate</label>
                 <span asp-validation-for="Input.Birthdate" class="text-danger"></span>
             </div>
+            @if(User.IsInRole(Roles.ADMIN))
+            {
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.IsAdmin" class="form-label">
+                        <input class="form-check-input" asp-for="Input.IsAdmin" />
+                        @Html.DisplayNameFor(m => m.Input.IsAdmin)
+                    </label>
+                </div>
+            }
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>

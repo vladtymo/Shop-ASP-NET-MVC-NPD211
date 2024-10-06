@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using ShopMvcApp_NPD211.Extensions;
 
 namespace ShopMvcApp_NPD211.Areas.Identity.Pages.Account
 {
@@ -95,6 +96,9 @@ namespace ShopMvcApp_NPD211.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             [Display(Name = "Birthdate")]
             public DateTime Birthdate { get; set; }
+
+            [Display(Name = "Admin")]
+            public bool IsAdmin { get; set; }
         }
 
 
@@ -122,6 +126,15 @@ namespace ShopMvcApp_NPD211.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (Input.IsAdmin && User.IsInRole(Roles.ADMIN))
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.ADMIN);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.USER);
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

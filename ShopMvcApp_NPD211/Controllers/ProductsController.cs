@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Core.Models;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
+using ShopMvcApp_NPD211.Extensions;
 
 namespace ShopMvcApp_NPD211.Controllers
 {
@@ -77,6 +79,7 @@ namespace ShopMvcApp_NPD211.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -87,6 +90,7 @@ namespace ShopMvcApp_NPD211.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPost]
         public IActionResult Edit(Product model)
         {
@@ -102,6 +106,7 @@ namespace ShopMvcApp_NPD211.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = Roles.ADMIN)]
         public async Task<IActionResult> Delete(int id)
         {
             var product = context.Products.Find(id);

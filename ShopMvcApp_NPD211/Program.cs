@@ -4,6 +4,8 @@ using Core.MapperProfiles;
 using ShopMvcApp_NPD211.Services;
 using Data.Entities;
 using Core.Services;
+using Microsoft.AspNetCore.Identity;
+using ShopMvcApp_NPD211.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +17,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ShopMvcDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<User>(options => 
+builder.Services.AddIdentity<User, IdentityRole>(options => 
     options.SignIn.RequireConfirmedAccount = false)
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
     .AddEntityFrameworkStores<ShopMvcDbContext>();
 
 builder.Services.AddAutoMapper(typeof(AppProfile));
@@ -36,7 +40,16 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
+
+// ---------- seed roles and admins
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.SeedRoles().Wait();
+    scope.ServiceProvider.SeedAdmin().Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
